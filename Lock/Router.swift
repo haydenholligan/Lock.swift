@@ -58,9 +58,9 @@ struct Router: Navigable {
         }
         let whitelistForActiveAuth = self.lock.options.enterpriseConnectionUsingActiveAuth
 
-        if self.lock.options.passwordless {
+        if self.lock.options.passwordlessMethod != .disabled {
             // Passwordless Email
-            if let connection = connections.passwordless.filter({ $0.name == "email" }).first {
+            if let connection = connections.passwordless.filter({ $0.name == self.lock.options.passwordlessMethod.mode }).first {
                 let passwordlessActivity = PasswordlessActivity.shared.withMessagePresenter(self.controller?.messagePresenter)
                 let interactor = PasswordlessInteractor(authentication: self.lock.authentication, dispatcher: lock.observerStore, user: self.user, options: self.lock.options, passwordlessActivity: passwordlessActivity)
                 let presenter = PasswordlessPresenter(interactor: interactor, connection: connection, navigator: self, options: self.lock.options)
@@ -70,8 +70,6 @@ struct Router: Navigable {
                     presenter.authPresenter = AuthPresenter(connections: connections.oauth2, interactor: interactor, customStyle: self.lock.style.oauth2)
                 }
                 return presenter
-            } else {
-                self.lock.logger.debug("Currently only Passwordless Email is supported.")
             }
             // Social Only
             if !connections.oauth2.isEmpty {
@@ -219,7 +217,7 @@ struct Router: Navigable {
             presentable = self.enterpriseActiveAuth(connection: connection, domain: domain)
         case .unrecoverableError(let error):
             presentable = self.unrecoverableError(error)
-        case .passwordlessEmail(let screen, let connection):
+        case .passwordless(let screen, let connection):
             presentable = self.passwordless(withScreen: screen, connection: connection)
         default:
             self.lock.logger.warn("Ignoring navigation \(route)")

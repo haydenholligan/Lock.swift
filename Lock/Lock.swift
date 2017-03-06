@@ -99,8 +99,7 @@ public class Lock: NSObject {
      - returns: a newly created Lock instance
      */
     public static func passwordless() -> Lock {
-        let newLock = Lock()
-        return newLock.withOptions { $0.passwordless = true }
+        return Lock().withOptions { $0.passwordlessMethod = .emailCode }
     }
 
     /**
