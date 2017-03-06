@@ -38,7 +38,7 @@ struct PasswordlessInteractor: PasswordlessAuthenticatable, Loggable {
 
     var identifier: String? { return self.user.email }
     var validIdentifier: Bool { return self.user.validEmail }
-    var code: String? = nil
+    var code: String?
     var validCode: Bool = false
 
     init(authentication: Authentication, dispatcher: Dispatcher, user: User, options: Options, passwordlessActivity: PasswordlessUserActivity) {
@@ -49,7 +49,7 @@ struct PasswordlessInteractor: PasswordlessAuthenticatable, Loggable {
         self.passwordlessActivity = passwordlessActivity
     }
 
-    func request(_ connection: String, callback: @escaping (PasswordlessAuthenticatableError?) -> ()) {
+    func request(_ connection: String, callback: @escaping (PasswordlessAuthenticatableError?) -> Void) {
         guard let identifier = self.identifier, self.validIdentifier else { return callback(.nonValidInput) }
 
         let type = (self.options.passwordlessMethod == .emailCode || self.options.passwordlessMethod == .smsCode) ? PasswordlessType.Code : PasswordlessType.iOSLink
@@ -69,7 +69,7 @@ struct PasswordlessInteractor: PasswordlessAuthenticatable, Loggable {
 
                 if type == .iOSLink {
 
-                    self.passwordlessActivity.onActivity() { password, messagePresenter in
+                    self.passwordlessActivity.onActivity { password, messagePresenter in
                         guard self.codeValidator.validate(password) == nil else {
                             messagePresenter?.showError(PasswordlessAuthenticatableError.invalidLink)
                             return self.dispatcher.dispatch(result: .error(PasswordlessAuthenticatableError.invalidLink))
@@ -96,7 +96,7 @@ struct PasswordlessInteractor: PasswordlessAuthenticatable, Loggable {
         }
     }
 
-    func login(_ connection: String, callback: @escaping (CredentialAuthError?) -> ()) {
+    func login(_ connection: String, callback: @escaping (CredentialAuthError?) -> Void) {
         guard let password = self.code, self.validCode, let identifier = self.identifier, self.validIdentifier
             else { return callback(.nonValidInput) }
 
