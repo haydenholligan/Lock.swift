@@ -19,7 +19,9 @@
 		5B1FD9721E546F500055C1AC /* PasswordlessInteractorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1FD9711E546F500055C1AC /* PasswordlessInteractorSpec.swift */; };
 		5B2826431E32297E00E48467 /* NativeHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2826421E32297E00E48467 /* NativeHandler.swift */; };
 		5B2981781DD51A460062535C /* InfoBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2981771DD51A460062535C /* InfoBarView.swift */; };
-		5B3DA2561E6ED92F00370C17 /* Auth0OAuth2InteractorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F92C68A1D4FE90F00CCE6C0 /* Auth0OAuth2InteractorSpec.swift */; };
+		5B3DA2531E6DE88900370C17 /* CountrySelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3DA2521E6DE88900370C17 /* CountrySelectorView.swift */; };
+		5B3DA2551E6EB9F800370C17 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3DA2541E6EB9F800370C17 /* TableViewController.swift */; };
+		5B4177431E44827B007843EA /* Auth0OAuth2InteractorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F92C68A1D4FE90F00CCE6C0 /* Auth0OAuth2InteractorSpec.swift */; };
 		5B4DE0151DD66DE1004C8AC2 /* EnterpriseDomainInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4DE0141DD66DE1004C8AC2 /* EnterpriseDomainInteractor.swift */; };
 		5B4DE0171DD67064004C8AC2 /* EnterpriseActiveAuthPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4DE0161DD67064004C8AC2 /* EnterpriseActiveAuthPresenter.swift */; };
 		5B4DE0191DD670F7004C8AC2 /* EnterpriseActiveAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4DE0181DD670F7004C8AC2 /* EnterpriseActiveAuthView.swift */; };
@@ -220,6 +222,8 @@
 		5B1FD9711E546F500055C1AC /* PasswordlessInteractorSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordlessInteractorSpec.swift; sourceTree = "<group>"; };
 		5B2826421E32297E00E48467 /* NativeHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NativeHandler.swift; sourceTree = "<group>"; };
 		5B2981771DD51A460062535C /* InfoBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InfoBarView.swift; path = Lock/InfoBarView.swift; sourceTree = SOURCE_ROOT; };
+		5B3DA2521E6DE88900370C17 /* CountrySelectorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountrySelectorView.swift; sourceTree = "<group>"; };
+		5B3DA2541E6EB9F800370C17 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		5B4DE0141DD66DE1004C8AC2 /* EnterpriseDomainInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EnterpriseDomainInteractor.swift; path = Lock/EnterpriseDomainInteractor.swift; sourceTree = SOURCE_ROOT; };
 		5B4DE0161DD67064004C8AC2 /* EnterpriseActiveAuthPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EnterpriseActiveAuthPresenter.swift; path = Lock/EnterpriseActiveAuthPresenter.swift; sourceTree = SOURCE_ROOT; };
 		5B4DE0181DD670F7004C8AC2 /* EnterpriseActiveAuthView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EnterpriseActiveAuthView.swift; path = Lock/EnterpriseActiveAuthView.swift; sourceTree = SOURCE_ROOT; };
@@ -729,6 +733,7 @@
 				5FC4348B1D1DFC5A005188BC /* Form.swift */,
 				5FEAE20F1D1A5691005C0028 /* HeaderView.swift */,
 				5F99AA8B1D1B3F1300D27842 /* InputField.swift */,
+				5B3DA2521E6DE88900370C17 /* CountrySelectorView.swift */,
 				5FDB41CF1D2C95B100166B67 /* MessageView.swift */,
 				5F99AA891D1B360C00D27842 /* PrimaryButton.swift */,
 				5F99AA931D1BABFC00D27842 /* SecondaryButton.swift */,
@@ -736,6 +741,7 @@
 				5F51EE691D1CBC830024BCD6 /* SingleInputView.swift */,
 				5FD6772B1D4C303C004B87C4 /* AuthButton.swift */,
 				5F5D4A251DC3FB34002A38EB /* PasswordPolicyView.swift */,
+				5B3DA2541E6EB9F800370C17 /* TableViewController.swift */,
 			);
 			name = Components;
 			path = Lock;
@@ -1022,6 +1028,7 @@
 				5FF0B2281E1726C400A73257 /* CredentialAuth.swift in Sources */,
 				5F99AA861D1B0BF100D27842 /* Resources.swift in Sources */,
 				5F2496B81D665AC500A1C6E2 /* UserAttribute.swift in Sources */,
+				5B3DA2551E6EB9F800370C17 /* TableViewController.swift in Sources */,
 				5F70F1DF1D7904A3004698DA /* ConnectionBuildable.swift in Sources */,
 				5FC4348F1D1E0A57005188BC /* DatabaseAuthenticable.swift in Sources */,
 				5BE4344F1E64820800950FA1 /* PasswordRecoverable.swift in Sources */,
@@ -1056,6 +1063,7 @@
 				5B568F821E4B6506004B3D98 /* PasswordlessAuthenticatableError.swift in Sources */,
 				5F92C68F1D50EAC200CCE6C0 /* LazyImage.swift in Sources */,
 				5F2496BA1D665AE900A1C6E2 /* CredentialAuthError.swift in Sources */,
+				5B3DA2531E6DE88900370C17 /* CountrySelectorView.swift in Sources */,
 				5B9A54461E4B2CB4004B5454 /* PasswordlessAuthenticatable.swift in Sources */,
 				5B55F3CB1E242A2E00B75CF5 /* UnrecoverableErrorPresenter.swift in Sources */,
 				5F57DFC61D4F79DD00C54DA8 /* AuthStyle.swift in Sources */,
