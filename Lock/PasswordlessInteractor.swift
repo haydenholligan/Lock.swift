@@ -76,7 +76,6 @@ struct PasswordlessInteractor: PasswordlessAuthenticatable, Loggable {
                 self.dispatcher.dispatch(result: .passwordless(identifier, self.options.passwordlessMethod))
 
                 if type == .iOSLink {
-
                     self.passwordlessActivity.onActivity { password, messagePresenter in
                         guard self.codeValidator.validate(password) == nil else {
                             messagePresenter?.showError(PasswordlessAuthenticatableError.invalidLink)
@@ -105,8 +104,12 @@ struct PasswordlessInteractor: PasswordlessAuthenticatable, Loggable {
     }
 
     func login(_ connection: String, callback: @escaping (CredentialAuthError?) -> Void) {
-        guard let password = self.code, self.validCode, let identifier = self.identifier, self.validIdentifier
+        guard let password = self.code, self.validCode, var identifier = self.identifier, self.validIdentifier
             else { return callback(.nonValidInput) }
+
+        if let countryCode = self.countryCode {
+            identifier = countryCode.prefix + identifier
+        }
 
         CredentialAuth(oidc: options.oidcConformant, realm: connection, authentication: authentication)
             .request(withIdentifier: identifier, password: password, options: self.options)

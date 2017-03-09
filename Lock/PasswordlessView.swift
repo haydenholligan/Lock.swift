@@ -25,7 +25,6 @@ import UIKit
 class PasswordlessView: UIView, View {
 
     weak var form: Form?
-    weak var formSMS: PasswordlessSMSForm?
     weak var primaryButton: PrimaryButton?
     weak var secondaryButton: SecondaryButton?
 
@@ -94,7 +93,7 @@ class PasswordlessView: UIView, View {
         let phoneInput = InternationalPhoneInputView(withCountryData: countryData)
         let messageView = UILabel()
 
-        self.formSMS = phoneInput
+        self.form = phoneInput
 
         self.container?.addArrangedSubview(strutView(withHeight: 25))
         if let authView = authCollectionView {
@@ -112,7 +111,7 @@ class PasswordlessView: UIView, View {
         let selectedCountry = countryCode ?? countryData.countryCode(forId: "US")
 
         phoneInput.updateCountry(selectedCountry)
-        phoneInput.inputField.type = .oneTimePassword
+        phoneInput.inputField.type = .phone
         phoneInput.inputField.returnKey = .done
 
         if authCollectionView != nil {
@@ -124,21 +123,22 @@ class PasswordlessView: UIView, View {
         self.container?.addArrangedSubview(strutView(withHeight: 25))
     }
 
-    func showCodeForm(sentTo identifier: String?) {
+    func showCodeForm(sentTo identifier: String?, mode: String) {
         let secondaryButton = SecondaryButton()
         let formView = SingleInputView()
 
         self.form = formView
         self.secondaryButton = secondaryButton
 
-        self.container?.addArrangedSubview(strutView(withHeight: 25))
+        self.container?.addArrangedSubview(strutView(withHeight: 20))
         self.container?.addArrangedSubview(formView)
 
         formView.type = .oneTimePassword
         formView.returnKey = .done
 
         formView.message = String(
-            format: "An email with the code has been sent to %1$@".i18n(key: "com.auth0.passwordless.code.sent", comment: "Passwordless code sent to %@{email}"), identifier ?? "")
+            format: "An %1$@ with the code has been sent to %2$@".i18n(key: "com.auth0.passwordless.code.sent", comment: "Passwordless code sent by %@{method} to %@{identifier}"),
+            mode, identifier ?? "")
         secondaryButton.title = "Did not get the code?".i18n(key: "com.auth0.passwordless.code.reminder", comment: "Passwordless code reminder action")
         self.container?.addArrangedSubview(secondaryButton)
     }

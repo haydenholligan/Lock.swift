@@ -237,6 +237,7 @@
 		5B55F3D21E24F3F000B75CF5 /* UnrecoverableErrorSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnrecoverableErrorSpec.swift; sourceTree = "<group>"; };
 		5B568F7F1E4B64D2004B3D98 /* Passwordless.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Passwordless.swift; sourceTree = "<group>"; };
 		5B568F811E4B6506004B3D98 /* PasswordlessAuthenticatableError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordlessAuthenticatableError.swift; sourceTree = "<group>"; };
+		5B5D5AF81E71BFEF00D23765 /* LockApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LockApp.entitlements; sourceTree = "<group>"; };
 		5B5F9F9E1E4B3FBE00EAB9EE /* PasswordlessView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordlessView.swift; sourceTree = "<group>"; };
 		5B6631511DDB990B001CB043 /* EnterpriseDomainInteractorSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterpriseDomainInteractorSpec.swift; sourceTree = "<group>"; };
 		5B889AED1E700FCA00C9FBAF /* CountryCodeStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryCodeStore.swift; sourceTree = "<group>"; };
@@ -671,6 +672,7 @@
 		5FEAE1BC1D1A5154005C0028 = {
 			isa = PBXGroup;
 			children = (
+				5B5D5AF81E71BFEF00D23765 /* LockApp.entitlements */,
 				5FEAE1C81D1A5154005C0028 /* Lock */,
 				5FEAE1D41D1A5154005C0028 /* LockTests */,
 				5FEADCF51D1A7EBC0032D810 /* App */,
@@ -887,7 +889,7 @@
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.SafariKeychain = {
-								enabled = 0;
+								enabled = 1;
 							};
 						};
 					};
@@ -1213,6 +1215,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = LockApp.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 86WQXF56BC;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1236,6 +1239,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = LockApp.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 86WQXF56BC;
 				FRAMEWORK_SEARCH_PATHS = (
