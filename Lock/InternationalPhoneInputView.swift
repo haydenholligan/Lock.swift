@@ -1,4 +1,4 @@
-// CountrySelectorView.swift
+// InternationalPhoneInputView.swift
 //
 // Copyright (c) 2017 Auth0 (http://auth0.com)
 //
@@ -22,7 +22,7 @@
 
 import UIKit
 
-class CountrySelectorView: UIView, PasswordlessForm {
+class InternationalPhoneInputView: UIView, PasswordlessSMSForm {
 
     var container: UIView
     var countryLabel: UILabel
@@ -31,7 +31,7 @@ class CountrySelectorView: UIView, PasswordlessForm {
     var stackView: UIStackView
     var countryStore: CountryCodeStore
 
-    init(withData data: CountryCodeStore) {
+    init(withCountryData data: CountryCodeStore) {
         self.container = UIView()
         self.countryLabel = UILabel()
         self.codeLabel = UILabel()
