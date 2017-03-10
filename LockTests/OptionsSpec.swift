@@ -93,12 +93,8 @@ class OptionsSpec: QuickSpec {
                 expect(options.autoClose) == true
             }
 
-            it("should be passwordless code method") {
-                expect(options.passwordlessMethod).to(equal(PasswordlessMethod.code))
-            }
-
-            it("should be false by default") {
-                expect(options.passwordless) == false
+            it("should be passwordless disabled by default") {
+                expect(options.passwordlessMethod).to(equal(PasswordlessMethod.disabled))
             }
         }
 
@@ -154,8 +150,8 @@ class OptionsSpec: QuickSpec {
                 expect(options.validate()).to(beNil())
             }
 
-            it("should fail setting audience in passwordless mode") {
-                options.passwordless = true
+            it("should fail setting audience when passwordless mode enabled") {
+                options.passwordlessMethod = .emailCode
                 options.audience = "https://myapi.com"
                 expect(options.validate()).toNot(beNil())
             }

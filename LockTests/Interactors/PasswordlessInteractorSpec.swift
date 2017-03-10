@@ -52,6 +52,7 @@ class PasswordlessInteractorSpec: QuickSpec {
             dispatchPasswordlessType = nil
             messagePresenter = MockMessagePresenter()
             options = LockOptions()
+            options.passwordlessMethod = .emailCode
             user = User()
             passwordlessActivity = PasswordlessActivity.shared.withMessagePresenter(messagePresenter)
             dispatcher = ObserverStore()
@@ -179,7 +180,6 @@ class PasswordlessInteractorSpec: QuickSpec {
         describe("request") {
 
             beforeEach {
-                user = User()
                 user.email = email
                 user.validEmail = true
                 interactor = PasswordlessInteractor(authentication: authentication, dispatcher: dispatcher, user: user, options: options, passwordlessActivity: passwordlessActivity)
@@ -232,7 +232,7 @@ class PasswordlessInteractorSpec: QuickSpec {
                 expect(dispatchPasswordlessType).toEventuallyNot(beNil())
             }
 
-            describe("magic link") {
+            describe("email link") {
 
                 var activity: NSUserActivity!
 
@@ -241,7 +241,7 @@ class PasswordlessInteractorSpec: QuickSpec {
                     user = User()
                     user.email = email
                     user.validEmail = true
-                    options.passwordlessMethod = .magicLink
+                    options.passwordlessMethod = .emailLink
                     interactor = PasswordlessInteractor(authentication: authentication, dispatcher: dispatcher, user: user, options: options, passwordlessActivity: passwordlessActivity)
                     stub(condition: passwordlessStart(email: email, connection: connection)) { _ in return Auth0Stubs.passwordlessSent(email) }
                     stub(condition: databaseLogin(identifier: email, password: code, connection: connection)) { _ in return Auth0Stubs.authentication() }

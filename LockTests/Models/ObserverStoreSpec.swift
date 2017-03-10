@@ -84,9 +84,9 @@ class ObserverStoreSpec: QuickSpec {
             }
 
             it("should disptach when user requests password") {
-                dispatcher.dispatch(result: .passwordless(email, .code))
+                dispatcher.dispatch(result: .passwordless(email, .emailCode))
                 expect(newEmail).toEventually(equal(email))
-                expect(passwordlessMethod).toEventually(equal(PasswordlessMethod.code))
+                expect(passwordlessMethod).toEventually(equal(PasswordlessMethod.emailCode))
             }
 
             // TODO: Check why it fails only in travis
@@ -173,7 +173,7 @@ class ObserverStoreSpec: QuickSpec {
                 }
 
                 it("should not dismiss onPasswordless") {
-                    dispatcher.dispatch(result: .passwordless(email, .code))
+                    dispatcher.dispatch(result: .passwordless(email, .emailCode))
                     expect(presenter.presented).toEventuallyNot(beNil(), timeout: 2)
                 }
 

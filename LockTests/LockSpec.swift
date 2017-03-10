@@ -150,9 +150,9 @@ class LockSpec: QuickSpec {
                 var method: PasswordlessMethod? = nil
                 let callback: (String, PasswordlessMethod) -> () = { email = $0; method = $1 }
                 let _ = lock.onPasswordless(callback: callback)
-                lock.observerStore.onPasswordless("mail@mail.com", .code)
+                lock.observerStore.onPasswordless("mail@mail.com", .emailCode)
                 expect(email) == "mail@mail.com"
-                expect(method) == PasswordlessMethod.code
+                expect(method) == PasswordlessMethod.emailCode
             }
 
         }

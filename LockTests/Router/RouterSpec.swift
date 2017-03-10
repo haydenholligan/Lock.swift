@@ -152,15 +152,11 @@ class RouterSpec: QuickSpec {
             describe("passwordless") {
 
                 beforeEach {
-                    lock = Lock(authentication: Auth0.authentication(clientId: "CLIENT_ID", domain: "samples.auth0.com"), webAuth: MockWebAuth()).withOptions{ $0.passwordless = true }
+                    lock = Lock(authentication: Auth0.authentication(clientId: "CLIENT_ID", domain: "samples.auth0.com"), webAuth: MockWebAuth()).withOptions{ $0.passwordlessMethod = .emailCode }
                     controller = MockLockController(lock: lock)
                     header = HeaderView()
                     controller.headerView = header
                     router = Router(lock: lock, controller: controller)
-                }
-
-                it("should be passwordless enabled") {
-                    expect(lock.options.passwordless) == true
                 }
 
                 it("should return root for passwordless email connection") {
@@ -446,7 +442,7 @@ class RouterSpec: QuickSpec {
 
             it("EnterpriseActiveAuth should should be equatable with EnterpriseActiveAuth") {
                 let passwordlessConnection = PasswordlessConnection(name: "email")
-                let match = Route.passwordlessEmail(screen: .code, connection: passwordlessConnection) ==  Route.passwordlessEmail(screen: .code, connection: passwordlessConnection)
+                let match = Route.passwordless(screen: .code, connection: passwordlessConnection) ==  Route.passwordless(screen: .code, connection: passwordlessConnection)
                 expect(match).to(beTrue())
             }
 
