@@ -24,14 +24,20 @@ import UIKit
 
 class CountryTableViewController: UITableViewController {
 
-    let dataStore: CountryCodeStore
+    var dataStore: CountryCodeStore
     let cellReuseIdentifier = "CountryCodeCell"
+    let searchController = UISearchController(searchResultsController: nil)
 
     var onDidSelect: (CountryCode) -> Void = { _ in }
 
     init(withData dataStore: CountryCodeStore) {
         self.dataStore = dataStore
         super.init(style: .grouped)
+
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        tableView.tableHeaderView = searchController.searchBar
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -45,20 +51,28 @@ class CountryTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataStore.countryCodes.count
+        return dataStore.filteredData().count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellData = dataStore.countryCodes[indexPath.row]
+        let cellData = dataStore.filteredData()[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath)
         cell.textLabel?.text = cellData.name + "   " + cellData.prefix
         return cell
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cellData = dataStore.countryCodes[indexPath.row]
+        let cellData = dataStore.filteredData()[indexPath.row]
         self.onDidSelect(cellData)
         self.dismiss(animated: true, completion: nil)
     }
+}
 
+extension CountryTableViewController: UISearchResultsUpdating {
+
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let searchText = searchController.searchBar.text else { return }
+        dataStore.updateFilter(searchText)
+        self.tableView.reloadData()
+    }
 }

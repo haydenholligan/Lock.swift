@@ -307,7 +307,7 @@ public class Lock: NSObject {
 
      ```
      func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
-        return Lock.continueActivity(userActivity, restorationHandler: restorationHandler)
+        return continueAuth(withActivity: userActivity)
      }
 
      ```
