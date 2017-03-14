@@ -59,7 +59,7 @@ struct Router: Navigable {
         let whitelistForActiveAuth = self.lock.options.enterpriseConnectionUsingActiveAuth
 
         if self.lock.options.passwordlessMethod != .disabled {
-            // Passwordless Email
+            // Passwordlessfa
             if let connection = connections.passwordless.filter({ $0.name == self.lock.options.passwordlessMethod.mode }).first {
                 let passwordlessActivity = PasswordlessActivity.shared.withMessagePresenter(self.controller?.messagePresenter)
                 let interactor = PasswordlessInteractor(authentication: self.lock.authentication, dispatcher: lock.observerStore, user: self.user, options: self.lock.options, passwordlessActivity: passwordlessActivity)
@@ -77,6 +77,8 @@ struct Router: Navigable {
                 let presenter = AuthPresenter(connections: connections.oauth2, interactor: interactor, customStyle: self.lock.style.oauth2)
                 return presenter
             }
+            self.lock.logger.debug("No passwordless mode connections configured.")
+            exit(withError: UnrecoverableError.clientWithNoConnections)
             return nil
         }
 
@@ -123,6 +125,8 @@ struct Router: Navigable {
             return presenter
         // Not supported connections configuration
         default:
+            self.lock.logger.debug("No classic mode connections configured.")
+            exit(withError: UnrecoverableError.clientWithNoConnections)
             return nil
         }
     }
